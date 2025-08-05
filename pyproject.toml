@@ -1,0 +1,118 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sales-agent"
+version = "0.1.0"
+description = "A sales agent project using OpenAI Agents SDK for automated sales outreach"
+readme = "README.md"
+requires-python = ">=3.8.1"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+keywords = ["ai", "agents", "sales", "automation", "openai"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "openai>=1.0.0",
+    "sendgrid>=6.10.0",
+    "pydantic>=2.0.0",
+    "certifi>=2023.0.0",  # For SSL certificate handling
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+
+notebook = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+    "matplotlib>=3.7.0",
+    "pandas>=2.0.0",
+    "jupytext>=1.17.0",
+]
+
+agents = [
+    "agents>=1.4.0",  # OpenAI Agents SDK - Note: May require manual installation on macOS 15.0+
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/sales-agent"
+Repository = "https://github.com/yourusername/sales-agent"
+Documentation = "https://github.com/yourusername/sales-agent#readme"
+Issues = "https://github.com/yourusername/sales-agent/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sales_agent"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["sales_agent"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--asyncio-mode=auto",
+]
+asyncio_mode = "auto"
+
+ 
